@@ -23,6 +23,7 @@ import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.plugins.annotations.ResolutionScope;
+import org.apache.maven.project.MavenProject;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -41,10 +42,13 @@ public class MyMojo
     public String getPublicationUrl() {
     	return publicationUrl;
     }
-    
+  
+	@Parameter(defaultValue = "${project}", readonly = true)
+	private MavenProject project;
     
     public void execute() throws MojoExecutionException, MojoFailureException
-    {
+    {  	
+    	project.getName();
     	getLog().info( "Publishing the API doc to the publication Url : " + getPublicationUrl() );
     }
 }
